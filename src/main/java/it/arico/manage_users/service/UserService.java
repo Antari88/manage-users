@@ -51,7 +51,7 @@ public class UserService {
         if(userRepository.existsByEmail(dto.getEmail())) {
             throw new EmailAlreadyExistsException(dto.getEmail());
         }
-
+        dto.setId(null);
         Set<Role> roles = dto.getRoles().stream()
         .map(roleName -> roleRepository.findByName(roleName)
               .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
