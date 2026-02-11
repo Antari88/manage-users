@@ -1,0 +1,5 @@
+INSERT INTO roles (name) VALUES ('OWNER');
+INSERT INTO roles (name) VALUES ('OPERATOR');
+INSERT INTO roles (name) VALUES ('MAINTAINER');
+INSERT INTO roles (name) VALUES ('DEVELOPER');
+INSERT INTO roles (name) VALUES ('REPORTER');
