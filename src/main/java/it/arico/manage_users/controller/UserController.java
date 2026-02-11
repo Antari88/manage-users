@@ -2,6 +2,7 @@ package it.arico.manage_users.controller;
 
 import it.arico.manage_users.model.UserDTO;
 import it.arico.manage_users.service.UserService;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +32,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO dto) {
         return ResponseEntity.ok(userService.createUser(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO dto) {
         UserDTO updated = userService.updateUser(id, dto);
         if (updated == null) {
             return ResponseEntity.notFound().build();

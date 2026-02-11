@@ -13,11 +13,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            // Disabilita CSRF (utile per test da Postman/Swagger)
-            .csrf(csrf -> csrf.disable())
-
-            // Configurazione autorizzazioni
+        http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/v3/api-docs/**",

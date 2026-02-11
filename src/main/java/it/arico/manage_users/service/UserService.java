@@ -1,6 +1,8 @@
 package it.arico.manage_users.service;
 
 import it.arico.manage_users.entity.User;
+import it.arico.manage_users.exception.EmailAlreadyExistsException;
+import it.arico.manage_users.exception.UserNotFoundException;
 import it.arico.manage_users.mapper.UserMapper;
 import it.arico.manage_users.model.UserDTO;
 import it.arico.manage_users.entity.Role;
@@ -39,7 +41,7 @@ public class UserService {
         JwtUtils.logCurrentUser();
         return userRepository.findById(id)
                 .map(UserMapper::toDTO)
-                .orElse(null);
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Transactional
@@ -47,7 +49,7 @@ public class UserService {
         JwtUtils.logCurrentUser();
 
         if(userRepository.existsByEmail(dto.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new EmailAlreadyExistsException(dto.getEmail());
         }
 
         Set<Role> roles = dto.getRoles().stream()
@@ -86,13 +88,13 @@ public class UserService {
 
             User updated = userRepository.save(user);
             return UserMapper.toDTO(updated);
-        }).orElse(null);
+        }).orElseThrow(() -> new UserNotFoundException(id));
         
     }
 
     public void deleteUser(Long id) {
         if(!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundException(id);
         }
         userRepository.deleteById(id);
         JwtUtils.logCurrentUser();
