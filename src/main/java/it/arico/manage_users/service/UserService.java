@@ -2,6 +2,7 @@ package it.arico.manage_users.service;
 
 import it.arico.manage_users.entity.User;
 import it.arico.manage_users.exception.EmailAlreadyExistsException;
+import it.arico.manage_users.exception.RoleNotFoundException;
 import it.arico.manage_users.exception.UserNotFoundException;
 import it.arico.manage_users.mapper.UserMapper;
 import it.arico.manage_users.model.UserDTO;
@@ -54,7 +55,7 @@ public class UserService {
         dto.setId(null);
         Set<Role> roles = dto.getRoles().stream()
         .map(roleName -> roleRepository.findByName(roleName)
-              .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
+              .orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleName)))
         .collect(Collectors.toSet());
 
     
@@ -79,10 +80,10 @@ public class UserService {
             user.setSurname(dto.getSurname());
             user.setTaxCode(dto.getTaxCode());
 
-            // Aggiorno ruoli
+            // Aggiorno ruoli RoleNotFoundException
             Set<Role> roles = dto.getRoles().stream()
                     .map(roleName -> roleRepository.findByName(roleName)
-                            .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
+                            .orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleName)))
                     .collect(Collectors.toSet());
             user.setRoles(roles);
 

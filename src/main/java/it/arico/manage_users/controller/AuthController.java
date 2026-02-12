@@ -42,6 +42,7 @@ public class AuthController {
                         .with("scope", "openid profile email")
                 )
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .map(token -> Map.of("access_token", token.get("access_token")));
     }
 }

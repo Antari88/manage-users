@@ -81,7 +81,7 @@ Per testare le chiamate: http://localhost:8080/swagger-ui/index.html
 
 Endpoint login:
 
-    POST /auth/login --> per ottenere Bearer, creato per praticità, chiaramente non metodo più sicuro
+    POST /auth/login --> per ottenere Bearer
 
 Header richiesto:
 
