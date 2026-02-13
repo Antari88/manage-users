@@ -102,7 +102,7 @@ class UserControllerTest {
 
     @Test
     void createUser_shouldReturn400_whenInvalid() throws Exception {
-        userDTO.setEmail(""); // invalido
+        userDTO.setEmail(""); 
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -166,15 +166,13 @@ class UserServiceTest {
     
     @Test
     void updateUser_shouldUpdateUserSuccessfully() {
-        // Arrange
+        
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(roleRepository.findByName(RolesType.OWNER)).thenReturn(Optional.of(role));
         when(userRepository.save(any(User.class))).thenReturn(user);
-    
-        // Act
+
         UserDTO result = userService.updateUser(1L, userDTO);
     
-        // Assert
         assertNotNull(result);
         verify(userRepository).findById(1L);
         verify(userRepository).save(any(User.class));
