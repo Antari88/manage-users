@@ -3,9 +3,11 @@ package it.arico.manage_users.model;
 import it.arico.manage_users.enums.RolesType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -30,5 +32,6 @@ public class UserDTO {
     @Size(min = 11, max = 16, message = "Tax code must be between 11 and 16 characters")
     private String taxCode;
 
-    private Set<RolesType> roles;
+    @NotEmpty(message = "Roles cannot be empty")
+    private Set<RolesType> roles= new HashSet<>();;
 }

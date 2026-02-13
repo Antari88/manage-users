@@ -49,7 +49,7 @@ public class AuthController {
 
         HttpEntity<MultiValueMap<String, String>> request =
             new HttpEntity<>(formData, headers);
-            
+
         ResponseEntity<Map<String, Object>> response =
         restTemplate.exchange(
                 tokenUri,
@@ -59,6 +59,9 @@ public class AuthController {
         );
 
         Map<String, Object> token = response.getBody();
+        if (token == null || !token.containsKey("access_token")) {
+            throw new IllegalStateException("Impossible retrive token");
+        }
 
         return Map.of("access_token", token.get("access_token"));
     }

@@ -80,7 +80,6 @@ public class UserService {
             user.setSurname(dto.getSurname());
             user.setTaxCode(dto.getTaxCode());
 
-            // Aggiorno ruoli RoleNotFoundException
             Set<Role> roles = dto.getRoles().stream()
                     .map(roleName -> roleRepository.findByName(roleName)
                             .orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleName)))
