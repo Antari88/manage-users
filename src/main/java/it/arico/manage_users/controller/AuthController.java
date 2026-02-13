@@ -60,7 +60,7 @@ public class AuthController {
 
         Map<String, Object> token = response.getBody();
         if (token == null || !token.containsKey("access_token")) {
-            throw new IllegalStateException("Impossible retrive token");
+            throw new IllegalStateException("Impossible retrieve token");
         }
 
         return Map.of("access_token", token.get("access_token"));

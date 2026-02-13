@@ -1,6 +1,8 @@
 package it.arico.manage_users.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import it.arico.manage_users.enums.RolesType;
 import it.arico.manage_users.exception.EmailAlreadyExistsException;
 import it.arico.manage_users.exception.UserNotFoundException;
 import it.arico.manage_users.model.UserDTO;
@@ -48,6 +50,7 @@ class UserControllerTest {
         userDTO.setName("Mario");
         userDTO.setSurname("Rossi");
         userDTO.setTaxCode("ABCDEF12345");
+        userDTO.getRoles().add(RolesType.OWNER); 
     }
 
     // =========================
