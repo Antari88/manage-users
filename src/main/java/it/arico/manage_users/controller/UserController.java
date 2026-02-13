@@ -25,10 +25,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
         UserDTO user = userService.getUser(id); 
-        if (user == null) {
-            return ResponseEntity.notFound().build(); 
-        }
-        return ResponseEntity.ok(user); // 200 OK
+        return ResponseEntity.ok(user); 
     }
 
     @PostMapping
@@ -39,9 +36,6 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO dto) {
         UserDTO updated = userService.updateUser(id, dto);
-        if (updated == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(updated);
     }
 

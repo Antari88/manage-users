@@ -55,7 +55,7 @@ public class UserService {
         dto.setId(null);
         Set<Role> roles = dto.getRoles().stream()
         .map(roleName -> roleRepository.findByName(roleName)
-              .orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleName)))
+              .orElseThrow(() -> new RoleNotFoundException(roleName.name())))
         .collect(Collectors.toSet());
 
     
@@ -82,7 +82,7 @@ public class UserService {
 
             Set<Role> roles = dto.getRoles().stream()
                     .map(roleName -> roleRepository.findByName(roleName)
-                            .orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleName)))
+                            .orElseThrow(() -> new RoleNotFoundException(roleName.name())))
                     .collect(Collectors.toSet());
             user.setRoles(roles);
 
